@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- mapper 代理的开发模式 -->
-<mapper namespace="cn.itcast.mybatis.mapper.UserMapper">
+<mapper namespace="com.lch.it.mybatis.mapper.UserMapper">
 
 	<!-- 经验：要基于单表来定义sql片段,这样话这个sql片段重用性才高 ,在sql片段中不要包括 where -->
 	<sql id="query_user_where">
@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	#{userCustom.sex}:取出pojo包装对象中性别值
 	${userCustom.username}：取出pojo包装对象中用户名称
 	 -->
-	<select id="findUserList" parameterType="cn.itcast.mybatis.po.UserQueryVo" resultType="cn.itcast.mybatis.po.UserCustom">
+	<select id="findUserList" parameterType="com.lch.it.mybatis.po.UserQueryVo" resultType="com.lch.it.mybatis.po.UserCustom">
 		SELECT * FROM USER
 		<!-- where可以自动去掉条件中的第一个and -->
 		<where>
@@ -81,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	parameterType：指定输入类型和findUserList一样
 	resultType：输出结果类型
 	 -->
-	<select id="findUserCount" parameterType="cn.itcast.mybatis.po.UserQueryVo" resultType="int">
+	<select id="findUserCount" parameterType="com.lch.it.mybatis.po.UserQueryVo" resultType="int">
 	   	SELECT count(*) FROM USER 
 		<where>
 			<!-- 引用sql片段 的id，如果refid指定的id不在本mapper文件中，需要前边加namespace -->
@@ -111,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	使用${}拼接sql，引起 sql注入
 	${value}：接收输入 参数的内容，如果传入类型是简单类型，${}中只能使用value
 	 -->
-	<select id="findUserByName" parameterType="java.lang.String" resultType="cn.itcast.mybatis.po.User">
+	<select id="findUserByName" parameterType="java.lang.String" resultType="com.lch.it.mybatis.po.User">
 		SELECT * FROM USER WHERE username LIKE '%${value}%'
 	</select>
 	
@@ -119,7 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	parameterType：指定输入 参数类型是pojo（包括 用户信息）
 	#{}中指定pojo的属性名，接收到pojo对象的属性值，Mybatis通过OGNL获取对象的属性值
 	-->
-	<insert id="insertUser" parameterType="cn.itcast.mybatis.po.User">
+	<insert id="insertUser" parameterType="com.lch.it.mybatis.po.User">
 		<!-- 
 		将插入数据的主键返回，返回到user对象中
 		
@@ -157,7 +157,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	parameterType指定user对象，包括 id和更新信息，注意：id必须存在
 	#{id}：从输入 user对象中获取id属性值
 	 -->
-	<update id="updateUser" parameterType="cn.itcast.mybatis.po.User">
+	<update id="updateUser" parameterType="com.lch.it.mybatis.po.User">
 		update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id=#{id}
 	</update>
 </mapper>
