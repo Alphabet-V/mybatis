@@ -1,4 +1,4 @@
-package com.lch.it.test;
+package com.lch.it.mybatis;
 
 public class Application {
 
